@@ -1,7 +1,6 @@
 import HomePage from "@/components/pages/hompage";
-import Image from "next/image";
 import { Fragment } from "react";
-import base from "../../ultils/airtable";
+import base from "../../utils/airtable";
 
 export default async function Home() {
   const data = await base('products').select({

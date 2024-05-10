@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className={fontSans.className} suppressHydrationWarning={true}>
         <div className={'min-h-screen flex flex-col justify-between'}>
           <Header />
-          <main>
+          <main className="mt-24">
             {children}
           </main>
           <Footer />
