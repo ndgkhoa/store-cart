@@ -40,7 +40,7 @@ const Footer = () => {
                         </Link>
                     </div>
                 </div>
-                <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-6 lg:text-right">
                     <h4 className="font-bold text-2xl">Chinh sach</h4>
                     <Link href={'/chinh-sach-bao-hanh'} className="text-gray-700">Chinh sach bao hanh</Link>
                     <Link href={'/chinh-sach-van-chuyen'} className="text-gray-700">Chinh sach van chuyen</Link>

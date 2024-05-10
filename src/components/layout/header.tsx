@@ -7,7 +7,7 @@ const Header = () => {
         <header className="fixed w-full top-0 z-50 bg-white shadow">
             <div className="container flex items-center justify-between gap-5 h-24">
                 <Link href={'/'} className="text-red-800 text-4xl italic font-bold">
-                    REXsport
+                    REXsports
                 </Link>
                 <div className="hidden lg:flex gap-12">
                     <Link href={'/'}>Trang chu</Link>

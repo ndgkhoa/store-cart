@@ -10,7 +10,7 @@ const fontSans = Quicksand({
 });
 
 export const metadata: Metadata = {
-  title: "Rexsport cloned",
+  title: "Rexsports-cloned",
   description: "Shopping cart",
 };
 
@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={fontSans.className}>
+      <body className={fontSans.className} suppressHydrationWarning={true}>
         <div className={'min-h-screen flex flex-col justify-between'}>
           <Header />
           <main>
