@@ -6,6 +6,7 @@ import Image from "next/image"
 import { Fragment } from "react"
 import { resolveRichText } from "../../../../utils/product_utils"
 import { marked } from "marked"
+import ProductVariantSelection from "@/components/pages/products/product-variant-selection"
 
 const SingleProduct = async ({ params }: { params: { productId: string } }) => {
     const data = await base('products').select({
@@ -70,6 +71,7 @@ const SingleProduct = async ({ params }: { params: { productId: string } }) => {
                     </div>
                     <div className="flex-grow">
                         <h1 className="my-4 text-4xl">{String(product.fields.name)}</h1>
+                        <ProductVariantSelection product={JSON.stringify(product)} />
                         <div className="my-8">
                             <div dangerouslySetInnerHTML={{ __html: marked.parse(resolveRichText(product.fields.description)) }}></div>
                         </div>

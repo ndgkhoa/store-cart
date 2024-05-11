@@ -11,3 +11,17 @@ export const resolveRichText = (text: any) => {
     return String(text).replace('\\', '')
         .replaceAll('\n', '<br/>')
 }
+
+export const getProductVariants = (productFields: any) => {
+    const keys = ['variants', 'variant_price', 'variant_image', 'variant_name', 'variant_inhouse', 'variant_id']
+    const rs: any[] = []
+    Array(productFields.variants.length).fill(null).forEach((_, index: number) => {
+        const obj: any = {}
+        keys.forEach((key: string) => {
+            obj[key] = productFields[key] ? productFields[key][index] : null
+        })
+        rs.push(obj)
+    }
+    )
+    return rs || [null]
+}
