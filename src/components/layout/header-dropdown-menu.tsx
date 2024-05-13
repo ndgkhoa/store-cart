@@ -17,25 +17,22 @@ const HeaderDropdownMenu = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="-translate-x-1/3">
                     <DropdownMenuSeparator />
-                    <DropdownMenuLabel className="lg:hidden">SAN PHAM</DropdownMenuLabel>
+                    <DropdownMenuLabel className="lg:hidden">SẢN PHẨM</DropdownMenuLabel>
                     <DropdownMenuSeparator />
 
-                    <DropdownMenuLabel>REX COLLECTION</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>Ao Rex</DropdownMenuItem>
-                    <DropdownMenuItem>Khung long Rex</DropdownMenuItem>
-                    <DropdownMenuItem>Balo</DropdownMenuItem>
+                    <DropdownMenuLabel>GIÀY CỎ NHÂN TẠO</DropdownMenuLabel>
+                    <DropdownMenuItem>Nike</DropdownMenuItem>
+                    <DropdownMenuItem>Adidas</DropdownMenuItem>
+                    <DropdownMenuItem>Mizuno</DropdownMenuItem>
 
                     <DropdownMenuSeparator />
-                    <DropdownMenuLabel>DUNG CU TAP THE THAO</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>Cac san pham khac</DropdownMenuItem>
-                    <DropdownMenuItem>Lo xo co tay</DropdownMenuItem>
+                    <DropdownMenuLabel>GIÀY FUTSAL</DropdownMenuLabel>
+                    <DropdownMenuItem>Nike</DropdownMenuItem>
+                    <DropdownMenuItem>Joma</DropdownMenuItem>
 
                     <DropdownMenuSeparator />
-                    <DropdownMenuLabel>REX PHIEN BAN GIOI HAN</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>Cac san pham khac</DropdownMenuItem>
+                    <DropdownMenuLabel>PHỤ KIỆN</DropdownMenuLabel>
+                    <DropdownMenuItem>Starbalm</DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
         </>

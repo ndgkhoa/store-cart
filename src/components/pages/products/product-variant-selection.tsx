@@ -6,8 +6,12 @@ import Image from "next/image";
 import { PiCheckCircleFill } from "react-icons/pi";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
+import { useCartStore } from "@/state/cart-store";
 
 const ProductVariantSelection = (props: { product: any }) => {
+    const { toast } = useToast()
+    const cartStore = useCartStore()
     const product = JSON.parse(props.product)
     const variants = getProductVariants(product.fields)
     const [price, setPrice] = useState(Number(getProductPrice(product.fields)))
@@ -16,10 +20,10 @@ const ProductVariantSelection = (props: { product: any }) => {
     return (
         <>
             <div className="my-4 py-3 text-xl border-t border-b border-dashed border-gray-900">
-                gia: {price.toLocaleString('vi-VN')} VND
+                Giá: {price.toLocaleString('vi-VN')} VND
             </div>
             <div className="my-4 flex flex-col gap-4">
-                <p>phan loai</p>
+                <p>Phân loại</p>
                 <div className="grid grid-cols-3 gap-4">
                     {variants.map((variant: any, index: number) => (
                         <Fragment key={variant.variants}>
@@ -61,8 +65,26 @@ const ProductVariantSelection = (props: { product: any }) => {
                     ))}
                 </div>
             </div>
-            <Button size={'lg'} className="w-full text-lg">
-                Them vao gio hang
+            <Button
+                size={'lg'}
+                className="w-full text-lg"
+                onClick={() => {
+                    toast({
+                        title: '✅ them thanh cong'
+                    })
+
+                    cartStore.add({
+                        product: {
+                            name: product.fields.name,
+                            record_id: product.fields.record_id,
+                        },
+                        product_variant: variants.find(v => v.variants === selectedId),
+                        variant_id: selectedId,
+                        quantity: 1
+                    })
+                }}
+            >
+                Thêm vào giỏ hàng
             </Button>
         </>
     )

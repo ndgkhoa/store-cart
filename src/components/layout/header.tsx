@@ -10,8 +10,8 @@ const Header = () => {
                     REXsports
                 </Link>
                 <div className="hidden lg:flex gap-12">
-                    <Link href={'/'}>Trang chu</Link>
-                    <Link href={'/products'}>San pham</Link>
+                    <Link href={'/'}>Trang chủ</Link>
+                    <Link href={'/products'}>Sản phẩm</Link>
                     <Link href={'/about'}>About</Link>
                 </div>
                 <div className="flex items-center gap-5">

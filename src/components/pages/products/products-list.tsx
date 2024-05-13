@@ -26,7 +26,6 @@ const ProductsList = (props: {
 }) => {
 
     const data = JSON.parse(props.data)
-    console.log(data);
 
     //['products-variants', 'description', 'name', 'images', 'id', 'record_id']
     return (

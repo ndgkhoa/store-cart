@@ -8,7 +8,7 @@ export default async function Home() {
   }).all()
   return (
     <Fragment>
-      <HomePage data={JSON.stringify(data)} />
+      <HomePage />
     </Fragment>
   );
 }

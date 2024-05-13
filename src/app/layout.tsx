@@ -3,6 +3,7 @@ import { Quicksand } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
+import { Toaster } from "@/components/ui/toaster";
 
 const fontSans = Quicksand({
   subsets: ["latin"],
@@ -29,6 +30,7 @@ export default function RootLayout({
           </main>
           <Footer />
         </div>
+        <Toaster />
       </body>
     </html>
   );

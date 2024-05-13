@@ -14,7 +14,7 @@ export default async function ProductPage() {
 
     return (
         <div className="container my-14">
-            <h1 className="text-2xl font-semibold mb-8">Tat ca san pham</h1>
+            <h1 className="text-2xl font-semibold mb-8">Tất cả sản phẩm</h1>
             <ProductsList data={JSON.stringify(data)} />
         </div>
     );

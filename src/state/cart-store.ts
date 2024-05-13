@@ -1,4 +1,5 @@
 import { create } from "zustand"
+import { createJSONStorage, persist } from "zustand/middleware"
 import { immer } from "zustand/middleware/immer"
 
 export type TCartItem = {
@@ -21,51 +22,60 @@ type Actions = {
 }
 
 export const useCartStore = create<State & Actions>()(
-    immer((set, getState) => ({
-        list: [],
-        add: (props) => {
-            const curState = getState()
-            const foundItemIndex = curState.list.findIndex(item => item.variant_id === props.variant_id)
+    persist(
+        immer((set, getState) => ({
+            list: [],
+            add: (props) => {
+                const curState = getState()
+                const foundItemIndex = curState.list.findIndex(item => item.variant_id === props.variant_id)
 
-            if (foundItemIndex !== -1) {
-                curState.increaseQuantity({
-                    ...props
-                })
-            } else {
+                if (foundItemIndex >= 0) {
+                    curState.increaseQuantity({
+                        ...props
+                    })
+                } else {
+                    set((state) => {
+                        state.list.push(props)
+                    })
+                }
+
+            },
+            increaseQuantity: (props) => {
+                const curState = getState()
+                const foundItemIndex = curState.list.findIndex(item => item.variant_id === props.variant_id)
+
                 set((state) => {
-                    state.list.push(props)
+                    state.list[foundItemIndex].quantity += props.quantity
                 })
-            }
+            },
+            updateQuantity: (props) => {
+                const curState = getState()
+                const foundItemIndex = curState.list.findIndex(item => item.variant_id === props.variant_id)
 
-        },
-        increaseQuantity: (props) => {
-            const curState = getState()
-            const foundItemIndex = curState.list.findIndex(item => item.variant_id === props.variant_id)
+                set((state) => {
+                    state.list[foundItemIndex].quantity = props.quantity
+                })
+            },
+            deleteCartItem: (props) => {
+                const curState = getState()
+                const foundItemIndex = curState.list.findIndex(item => item.variant_id === props.variant_id)
 
-            set((state) => {
-                state.list[foundItemIndex].quantity += props.quantity
+                set((state) => {
+                    state.list.splice(foundItemIndex, 1)
+                })
+            },
+            reset: () => {
+                set((state) => {
+                    state.list = []
+                })
+            },
+        })),
+        {
+            name: 'cart-storage',
+            storage: createJSONStorage(() => localStorage),
+            partialize: (state) => ({
+                list: state.list
             })
-        },
-        updateQuantity: (props) => {
-            const curState = getState()
-            const foundItemIndex = curState.list.findIndex(item => item.variant_id === props.variant_id)
-
-            set((state) => {
-                state.list[foundItemIndex].quantity = props.quantity
-            })
-        },
-        deleteCartItem: (props) => {
-            const curState = getState()
-            const foundItemIndex = curState.list.findIndex(item => item.variant_id === props.variant_id)
-
-            set((state) => {
-                state.list.splice(foundItemIndex, 1)
-            })
-        },
-        reset: () => {
-            set((state) => {
-                state.list = []
-            })
-        },
-    }))
+        }
+    )
 )

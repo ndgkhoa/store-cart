@@ -1,9 +1,5 @@
 'use client'
-const HomePage = (props: {
-    data: any
-}) => {
-
-
+const HomePage = () => {
     return (
         <>
             home
