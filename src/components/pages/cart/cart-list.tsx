@@ -13,12 +13,17 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+
 import { Button } from "@/components/ui/button"
 import { PiMinus, PiPlus, PiTrash } from "react-icons/pi"
 import { Input } from "@/components/ui/input";
+import DialogCheckout from "./dialog-checkout";
+import { useState } from "react";
 
 const CartList = () => {
     const cartStore = useCartStore()
+    const [checkoutDialog, setCheckoutDialog] = useState(false)
+
     if (!isValidArray(cartStore.list)) return (
         <>
             <p>Không có sản phẩm nào trong giỏ hàng</p>
@@ -95,10 +100,13 @@ const CartList = () => {
                     ))}
                 </TableBody>
             </Table>
+
             <div className="flex flex-col gap-3 my-5 w-full items-end sticky top-28">
                 <p>Tổng giá trị: {cartStore.list.reduce((acc, item) => acc + item.product_variant.variant_price * item.quantity, 0).toLocaleString('vn-VN')} VND</p>
-                <Button size={'lg'}>Thanh toán</Button>
+                <Button size={'lg'} onClick={() => setCheckoutDialog(true)}>Thanh toán</Button>
             </div>
+
+            <DialogCheckout open={checkoutDialog} onOpenChange={(open) => setCheckoutDialog(open)} />
         </>
     )
 }
@@ -131,4 +139,3 @@ export const CartItemInfo = ({ cartItem }: { cartItem: TCartItem }) => {
         </div>
     )
 }
-
