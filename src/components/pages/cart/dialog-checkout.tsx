@@ -65,7 +65,7 @@ const DialogCheckout = (props: {
                         fields: {
                             price: item.product_variant.variant_price,
                             quantity: item.quantity,
-                            productVariant: [item.variant_id],
+                            product_variant: [item.variant_id],
                             order: [orderId]
                         }
                     }
@@ -75,6 +75,9 @@ const DialogCheckout = (props: {
                     toast({
                         title: '✅ Đơn hàng đã được tạo thành công'
                     })
+                    cartStore.addSuccessList()
+                    cartStore.reset()
+                    router.push('/cart/order-success')
                 }
             } else {
                 new Error('Đã có lỗi, tạo đơn không thành công')

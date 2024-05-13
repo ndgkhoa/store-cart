@@ -70,7 +70,7 @@ const ProductVariantSelection = (props: { product: any }) => {
                 className="w-full text-lg"
                 onClick={() => {
                     toast({
-                        title: '✅ Thêm thành công'
+                        title: '✅ Đã thêm sản phẩm vào giỏ hàng'
                     })
 
                     cartStore.add({

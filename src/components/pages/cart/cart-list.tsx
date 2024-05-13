@@ -7,7 +7,6 @@ import Image from "next/image";
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
@@ -30,6 +29,7 @@ const CartList = () => {
             <p>Hãy tham khảo các <Link className="text-indigo-600 underline" href={'/products'}>sản phẩm</Link> của chúng tôi</p>
         </>
     )
+
     return (
         <>
             <Table>

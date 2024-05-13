@@ -9,8 +9,12 @@ export type TCartItem = {
     quantity: number
 }
 
+export const clearStateTime = 60 * 60 * 1000
+
 type State = {
     list: TCartItem[],
+    orderSuccessList: TCartItem[],
+    setupTime: number
 }
 
 type Actions = {
@@ -19,12 +23,15 @@ type Actions = {
     updateQuantity: (props: { variant_id: string, quantity: number }) => void,
     deleteCartItem: (props: { variant_id: string }) => void,
     reset: () => void,
+    addSuccessList: () => void
 }
 
 export const useCartStore = create<State & Actions>()(
     persist(
         immer((set, getState) => ({
             list: [],
+            orderSuccessList: [],
+            setupTime: 0,
             add: (props) => {
                 const curState = getState()
                 const foundItemIndex = curState.list.findIndex(item => item.variant_id === props.variant_id)
@@ -36,6 +43,10 @@ export const useCartStore = create<State & Actions>()(
                 } else {
                     set((state) => {
                         state.list.push(props)
+
+                        // time for reset the state
+                        const now = new Date().getTime()
+                        state.setupTime === 0 ? state.setupTime = now : ''
                     })
                 }
 
@@ -67,14 +78,19 @@ export const useCartStore = create<State & Actions>()(
             reset: () => {
                 set((state) => {
                     state.list = []
+                    state.setupTime = 0
                 })
             },
+            addSuccessList: () => {
+                set((state) => void (state.orderSuccessList = [...state.list]))
+            }
         })),
         {
             name: 'cart-storage',
             storage: createJSONStorage(() => localStorage),
             partialize: (state) => ({
-                list: state.list
+                list: state.list,
+                setupTime: state.setupTime
             })
         }
     )

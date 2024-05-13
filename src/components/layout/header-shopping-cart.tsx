@@ -1,10 +1,21 @@
 'use client'
-import { useCartStore } from "@/state/cart-store"
+import { clearStateTime, useCartStore } from "@/state/cart-store"
 import Link from "next/link"
+import { useEffect } from "react"
 import { AiOutlineShoppingCart } from "react-icons/ai"
 
 const HeaderShoppingCart = () => {
     const cartStore = useCartStore()
+
+    useEffect(() => {
+        const now = new Date().getTime()
+        if (cartStore.setupTime) {
+            if (now - cartStore.setupTime > clearStateTime) {
+                cartStore.reset()
+            }
+        }
+    }, [cartStore.setupTime])
+
     return (
         <Link href={'/cart'} className="relative">
             <AiOutlineShoppingCart className="w-8 h-8" />
